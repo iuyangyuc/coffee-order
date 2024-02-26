@@ -3,6 +3,12 @@ package edu.iu.habahram.coffeeorder.repository;
 import edu.iu.habahram.coffeeorder.model.*;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 @Repository
 public class OrderRepository {
     public Receipt add(OrderData order) throws Exception {
@@ -16,6 +22,9 @@ public class OrderRepository {
                 break;
             case "house blend":
                 beverage = new HouseBlend();
+                break;
+            case "decaf":
+                beverage = new Decaf();
                 break;
         }
         if (beverage == null) {
@@ -40,6 +49,15 @@ public class OrderRepository {
             }
         }
         Receipt receipt = new Receipt(beverage.getDescription(), beverage.cost());
+        appendToFile(Path.of("db.txt"), ReceiptManager.createReceipt(beverage.getDescription(), beverage.cost()));
         return receipt;
+    }
+
+    private static void appendToFile(Path path, String content) throws IOException {
+        content += "\n";
+        Files.write(path,
+                content.getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND);
     }
 }
