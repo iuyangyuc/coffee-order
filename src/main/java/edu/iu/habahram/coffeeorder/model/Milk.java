@@ -6,8 +6,8 @@ public class Milk extends CondimentDecorator{
     }
 
     @Override
-    public float cost() {
-        return  beverage.cost() + 0.4F;
+    public double cost() {
+        return  beverage.cost() + 0.4;
     }
 
     @Override
