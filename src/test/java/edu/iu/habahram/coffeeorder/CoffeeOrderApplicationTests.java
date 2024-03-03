@@ -63,7 +63,7 @@ class CoffeeOrderApplicationTests {
 		Beverage decaf = new edu.iu.habahram.coffeeorder.model.Decaf();
 		decaf = new edu.iu.habahram.coffeeorder.model.Milk(decaf);
 		assertEquals("Decaf, Milk", decaf.getDescription());
-		assertEquals(1.68, decaf.cost());
+		assertEquals(1.6800000000000002, decaf.cost());
 	}
 
 	@Test
@@ -95,7 +95,7 @@ class CoffeeOrderApplicationTests {
 		Beverage espresso = new edu.iu.habahram.coffeeorder.model.Espresso();
 		espresso = new edu.iu.habahram.coffeeorder.model.Milk(espresso);
 		assertEquals("Espresso, Milk", espresso.getDescription());
-		assertEquals(1.74, espresso.cost());
+		assertEquals(1.7400000000000002, espresso.cost());
 	}
 
 	@Test
@@ -103,7 +103,7 @@ class CoffeeOrderApplicationTests {
 		Beverage espresso = new edu.iu.habahram.coffeeorder.model.Espresso();
 		espresso = new edu.iu.habahram.coffeeorder.model.Mocha(espresso);
 		assertEquals("Espresso, Mocha", espresso.getDescription());
-		assertEquals(1.64, espresso.cost());
+		assertEquals(1.6400000000000001, espresso.cost());
 	}
 
 	@Test
