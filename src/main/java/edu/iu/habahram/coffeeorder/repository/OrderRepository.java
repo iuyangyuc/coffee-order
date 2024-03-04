@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 @Repository
 public class OrderRepository {
     public Receipt add(OrderData order) throws Exception {
+        int id = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
         Beverage beverage = null;
         switch (order.beverage().toLowerCase()) {
             case "dark roast":
@@ -48,8 +49,8 @@ public class OrderRepository {
                     throw new Exception("Condiment type '%s' is not valid".formatted(condiment));
             }
         }
-        Receipt receipt = new Receipt(beverage.getDescription(), beverage.cost());
-        appendToFile(Path.of("db.txt"), ReceiptManager.createReceipt(beverage.getDescription(), beverage.cost()));
+        Receipt receipt = new Receipt(id ,beverage.getDescription(), beverage.cost());
+        appendToFile(Path.of("db.txt"), receipt.toString());
         return receipt;
     }
 

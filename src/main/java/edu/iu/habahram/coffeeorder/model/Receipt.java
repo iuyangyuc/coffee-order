@@ -1,8 +1,5 @@
 package edu.iu.habahram.coffeeorder.model;
 
-public record Receipt(String description, double cost) {
-    public String toStringWithId(int id) {
-        return id + ", " + cost + ", " + description;
-    }
+public record Receipt(int id, String description, double cost) {
 }
 
