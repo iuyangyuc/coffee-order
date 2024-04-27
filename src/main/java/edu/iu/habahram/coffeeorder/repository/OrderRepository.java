@@ -8,6 +8,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @Repository
 public class OrderRepository {
@@ -50,6 +54,7 @@ public class OrderRepository {
             }
         }
         Receipt receipt = new Receipt(id ,beverage.getDescription(), beverage.cost());
+        writeReceiptToSQL(receipt);
         appendToFile(Path.of("db.txt"), receipt.toString());
         return receipt;
     }
@@ -60,5 +65,29 @@ public class OrderRepository {
                 content.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND);
+    }
+
+    private static boolean writeReceiptToSQL(Receipt receipt) {
+        String url = "jdbc:postgresql://dpg-coh89pmd3nmc73a12l90-a.ohio-postgres.render.com/c322_lab10_7m1s";
+        String username = "c322_lab10_7m1s_user";
+        String password = "XV2DFSoEXTyplv7lwpMfL9ZWbeIzpshL";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String sql = "INSERT INTO coffee.receipts (id, cost, description) VALUES (?, ?, ?)";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, receipt.id());
+            statement.setDouble(2, receipt.cost());
+            statement.setString(3, receipt.description());
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new receipt was inserted successfully!");
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+        }
+        return false;
     }
 }
