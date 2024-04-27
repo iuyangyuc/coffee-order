@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-coh89pmd3nmc73a12l90-a.ohio-postgres.render.com/c322_lab10_7m1s
+    username: c322_lab10_7m1s_user
+    password: XV2DFSoEXTyplv7lwpMfL9ZWbeIzpshL
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  sql:
+    init:
+      mode: always
