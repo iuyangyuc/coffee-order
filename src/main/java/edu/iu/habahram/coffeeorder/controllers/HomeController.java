@@ -11,6 +11,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String greetings() {
-        return "Welcome to the coffee order system! -- 07 Mar-1";
+        return "Welcome to the coffee order system! -- sql";
     }
 }
