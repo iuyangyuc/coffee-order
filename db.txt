@@ -1,4 +1,4 @@
 1, 1.8, Decaf, Whip, Soy
 2, 1.8, Decaf, Whip, Soy
 3, 1.8, Decaf, Whip, Soy
-Receipt[id=526159616, description=House Blend, Whip, cost=1.9]
+Receipt[id=490398053, description=House Blend, Whip, cost=1.9]

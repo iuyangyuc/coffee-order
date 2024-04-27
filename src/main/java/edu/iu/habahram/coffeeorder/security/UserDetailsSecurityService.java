@@ -25,7 +25,7 @@ public class UserDetailsSecurityService implements UserDetailsService {
                 throw new UsernameNotFoundException("User not found");
             }
             return User.withUsername(username)
-                    .password(customer.password())
+                    .password(customer.getPassword())
                     .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
